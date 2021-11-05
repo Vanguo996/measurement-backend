@@ -3,8 +3,8 @@ import logging
 import pyvisa as visa
 from pyvisa.resources.gpib import GPIBInstrument
 from pyvisa.resources.resource import Resource
-from van_pb2 import response
-import van_pb2_grpc as pb2_grpc
+from sweep_pb2 import response
+import sweep_pb2_grpc as pb2_grpc
 
 from concurrent.futures import ThreadPoolExecutor
 import config
@@ -14,7 +14,7 @@ class InstrumentsServer(pb2_grpc.InstrumentsControllerServicer):
 
     def __init__(self):
         self.rm = visa.ResourceManager(config.visa_lib)
-        logging.info("RM INITED: {0}".format(config.visa_lib))
+        logging.info("Resource Manager found in : {0}".format(config.visa_lib))
 
 
     def CloseOutput(self, request, context):

@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import van_pb2 as van__pb2
+import sweep_pb2 as sweep__pb2
 
 
 class InstrumentsControllerStub(object):
@@ -16,13 +16,13 @@ class InstrumentsControllerStub(object):
         """
         self.CloseOutput = channel.unary_unary(
                 '/InstrumentsController/CloseOutput',
-                request_serializer=van__pb2.request.SerializeToString,
-                response_deserializer=van__pb2.response.FromString,
+                request_serializer=sweep__pb2.request.SerializeToString,
+                response_deserializer=sweep__pb2.response.FromString,
                 )
         self.IVSweepMode = channel.unary_stream(
                 '/InstrumentsController/IVSweepMode',
-                request_serializer=van__pb2.sweep_request.SerializeToString,
-                response_deserializer=van__pb2.response.FromString,
+                request_serializer=sweep__pb2.sweep_request.SerializeToString,
+                response_deserializer=sweep__pb2.response.FromString,
                 )
 
 
@@ -46,13 +46,13 @@ def add_InstrumentsControllerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CloseOutput': grpc.unary_unary_rpc_method_handler(
                     servicer.CloseOutput,
-                    request_deserializer=van__pb2.request.FromString,
-                    response_serializer=van__pb2.response.SerializeToString,
+                    request_deserializer=sweep__pb2.request.FromString,
+                    response_serializer=sweep__pb2.response.SerializeToString,
             ),
             'IVSweepMode': grpc.unary_stream_rpc_method_handler(
                     servicer.IVSweepMode,
-                    request_deserializer=van__pb2.sweep_request.FromString,
-                    response_serializer=van__pb2.response.SerializeToString,
+                    request_deserializer=sweep__pb2.sweep_request.FromString,
+                    response_serializer=sweep__pb2.response.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -76,8 +76,8 @@ class InstrumentsController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/InstrumentsController/CloseOutput',
-            van__pb2.request.SerializeToString,
-            van__pb2.response.FromString,
+            sweep__pb2.request.SerializeToString,
+            sweep__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -93,7 +93,7 @@ class InstrumentsController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/InstrumentsController/IVSweepMode',
-            van__pb2.sweep_request.SerializeToString,
-            van__pb2.response.FromString,
+            sweep__pb2.sweep_request.SerializeToString,
+            sweep__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
