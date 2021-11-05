@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: python-streaming-server
+  namespace: visa-expirements
+spec:
+  hostNetwork: true
+  # restartPolicy: Never
+  # nodeSelector:
+  #   key: k8s-node1
+  containers:
+  - image: mes-server:latest
+    name: visa-server
+    volumeMounts:
+      - name: dkms-src
+        mountPath: /usr/src
+      - name: dkms-lib  
+        mountPath: /var/lib/dkms 
+      - name: lib-modules
+        mountPath: /lib/modules
+    securityContext:
+      privileged: true
+    # ports:
+    #   - containerPort: 8766
+  volumes:
+    - name: dkms-src
+      hostPath:
+        path: /usr/src
+    - name: dkms-lib
+      hostPath:
+        path: /var/lib/dkms
+    - name: lib-modules
+      hostPath: 
+        path: /lib/modules
